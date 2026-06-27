@@ -1,0 +1,125 @@
+{
+  "project_overview": {
+    "type": "Frontend Developer Personal Portfolio",
+    "aesthetic": "Editorial/Minimal with unique experimental twists",
+    "theme": "Light",
+    "archetype": "4_Swiss_High_Contrast_Mixed_With_Luxury_Editorial"
+  },
+  "colors": {
+    "background_primary": "#F7F5F0",
+    "background_secondary": "#EAE7DF",
+    "text_primary": "#0F0F0F",
+    "text_secondary": "#595959",
+    "accent_primary": "#FF4500",
+    "accent_secondary": "#002FA7",
+    "border_color": "#D1CEC7",
+    "glass_background": "rgba(247, 245, 240, 0.7)",
+    "glass_border": "rgba(15, 15, 15, 0.1)"
+  },
+  "typography": {
+    "headings": {
+      "family": "Playfair Display, serif",
+      "weights": [400, 700, 900],
+      "usage": "Oversized, dramatic headlines. Use italic sparingly for contrast within a single line."
+    },
+    "body": {
+      "family": "DM Sans, sans-serif",
+      "weights": [400, 500, 700],
+      "usage": "Clean, highly legible body text and UI labels."
+    },
+    "mono": {
+      "family": "JetBrains Mono, monospace",
+      "weights": [400],
+      "usage": "Code snippets, technical metrics, and small overlines."
+    },
+    "scale_rules": {
+      "h1": "text-5xl md:text-7xl lg:text-[8vw] leading-[0.9] tracking-tighter",
+      "h2": "text-4xl md:text-6xl leading-[1.1] tracking-tight",
+      "h3": "text-2xl md:text-3xl leading-snug",
+      "body_large": "text-lg md:text-xl leading-relaxed",
+      "body_base": "text-base leading-relaxed",
+      "overline": "text-xs tracking-[0.2em] uppercase font-mono"
+    }
+  },
+  "spacing_and_layout": {
+    "grid_system": "12-column CSS Grid. Aggressive asymmetry. Do not perfectly center content.",
+    "section_padding": "py-24 md:py-40",
+    "container": "max-w-[1440px] mx-auto px-6 md:px-12",
+    "gap_strategy": "Wide gaps (gap-12 to gap-24) between major sections to let content breathe."
+  },
+  "sections": [
+    {
+      "name": "Hero",
+      "requirements": "Massive typography (Playfair Display) taking up 70% of the screen. Include a 'Live Availability Card' (floating, glassmorphism, glowing dot indicating 'Available'). Subtle abstract texture in the background. Scroll indicator.",
+      "interactivity": "Kinetic text entry on load. Hover over 'Frontend Developer' to trigger a text reveal or distinct color transition."
+    },
+    {
+      "name": "About",
+      "requirements": "Editorial magazine layout. Text wrapped around or overlapping a portrait/workspace image. Use a mix of serif italic and sans-serif for the narrative.",
+      "interactivity": "Parallax scroll on the image."
+    },
+    {
+      "name": "Skills",
+      "requirements": "Instead of boring grids, use an infinite slow-moving marquee (react-fast-marquee) for categories (e.g., 'React • GSAP • Tailwind • Next.js') overlaid with a brutalist sans-serif list for proficiency levels."
+    },
+    {
+      "name": "Experience",
+      "requirements": "Minimalist vertical timeline. Years in oversized serif, roles in crisp sans-serif. Left heavy border that fills up on scroll."
+    },
+    {
+      "name": "Project Story Mode (Portfolio)",
+      "requirements": "A grid of 4-6 project cards. Clicking a card opens a full-screen layout showing an 8-step journey: Problem -> Research -> Design -> Development -> Challenges -> Solution -> Impact -> Live Demo.",
+      "interactivity": "Framer Motion LayoutGroup for seamless expansion from card to full page. Scroll-driven animations."
+    },
+    {
+      "name": "Before vs After Redesigns",
+      "requirements": "Side-by-side image comparison component with a draggable slider. Show performance scores (e.g., 'Lighthouse 65 -> 99') underneath using the monospace font.",
+      "interactivity": "Draggable slider thumb."
+    },
+    {
+      "name": "Design Playground",
+      "requirements": "A bento grid ('Tetris' mode) showcasing UI experiments. Must include: 1) 3D tilt card, 2) Magnetic button, 3) Glassmorphism panel, 4) Micro-interactions (hover animations).",
+      "interactivity": "Heavy interaction. Every card responds differently to mouse movement."
+    },
+    {
+      "name": "Why Work With Me",
+      "requirements": "8 minimalist trait cards (Fast Communication, Pixel Perfect, SEO First, Performance Focused, Scalable Code, Clean Architecture, AI Ready, Business Mindset). Icons from lucide-react. Strict borders (1px solid border_color) to give a structural/Swiss feel."
+    },
+    {
+      "name": "Contact Form",
+      "requirements": "Minimalist form placed on a solid block (e.g., #0F0F0F background, #F7F5F0 text) at the bottom. Input fields should be bottom-border only. Saves to MongoDB.",
+      "interactivity": "Form submission state changes. Floating labels on input focus."
+    }
+  ],
+  "components": {
+    "live_availability_card": "Floating component, fixed or sticky. Glassmorphism background. Green glowing dot for 'Available'. text-xs monospace.",
+    "buttons": "Magnetic buttons (Framer Motion). Base is border-only, hover state fills with accent color (Electric Vermilion) and text turns white. Rounded full (pill shape) for a touch of elegance.",
+    "cards": "For projects: Image-heavy, text hidden until hover, or simple minimal text below image. No heavy drop shadows; use 1px borders or very subtle ambient shadows."
+  },
+  "animations": {
+    "page_load": "Staggered text reveal (words shifting up from a mask).",
+    "scroll": "Use Lenis for smooth scrolling. Elements fade and translate up slightly on entering viewport (Framer Motion whileInView).",
+    "hover": "Magnetic effect on major CTAs."
+  },
+  "media": {
+    "images": {
+      "hero_texture": "https://images.pexels.com/photos/1774986/pexels-photo-1774986.jpeg",
+      "about_workspace": "https://images.pexels.com/photos/6372888/pexels-photo-6372888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "project_1": "https://images.pexels.com/photos/6592698/pexels-photo-6592698.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "project_2_before": "https://images.unsplash.com/photo-1536311312982-31ed42ebc0f0",
+      "project_2_after": "https://images.unsplash.com/photo-1602536100338-c7762727ddb7",
+      "playground_abstract": "https://images.pexels.com/photos/25949753/pexels-photo-25949753.jpeg"
+    }
+  },
+  "testing": {
+    "data_testid_rules": "All interactive elements (buttons, inputs, sliders, project cards) MUST have descriptive data-testid attributes (e.g., hero-contact-button, project-card-1, contact-form-submit). This is CRITICAL."
+  },
+  "tech_stack": {
+    "framework": "React / Vite / Next.js",
+    "styling": "Tailwind CSS",
+    "animations": "framer-motion, lenis, react-fast-marquee",
+    "icons": "lucide-react",
+    "database": "MongoDB (for Contact Form)"
+  },
+  "instructions_to_main_agent": "1. Configure the exact color palette in Tailwind. 2. Implement 'Playfair Display' and 'DM Sans'. 3. Build each section prioritizing the specified experimental typography and layouts. 4. Heavily utilize framer-motion for the requested Project Story Mode transitions and Magnetic Buttons. 5. Setup MongoDB connection for the contact form and handle API routes accordingly. 6. DO NOT FORGET data-testid attributes everywhere."
+}
