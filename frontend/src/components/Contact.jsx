@@ -44,7 +44,7 @@ export default function Contact() {
     <section id="contact" data-testid="contact-section" className="bg-ink text-bone py-24 md:py-40">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-12 gap-8 md:gap-12">
         <div className="col-span-12 lg:col-span-5">
-          <div className="mono uppercase text-[11px] tracking-[0.22em] text-vermilion">07 — Contact</div>
+          <div className="mono uppercase text-[11px] tracking-[0.22em] text-vermilion">06 — Contact</div>
           <h2 className="serif text-[clamp(2.35rem,11vw,3.5rem)] md:text-7xl leading-[0.95] tracking-tight mt-6">
             Let{`'`}s build<br />
             something <em className="italic">good</em>

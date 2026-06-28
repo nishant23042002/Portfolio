@@ -13,7 +13,7 @@ export default function Playground() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         <div className="grid grid-cols-12 gap-8 mb-16">
           <div className="col-span-12 md:col-span-6">
-            <div className="overline">05 — Design Playground</div>
+            <div className="overline">04 — Design Playground</div>
             <h2 className="serif text-[clamp(2.25rem,10vw,3rem)] md:text-6xl mt-4 tracking-tight leading-[1.05]">
               Tiny <span className="italic">experiments</span>, big delight.
             </h2>

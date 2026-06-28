@@ -17,7 +17,6 @@ export default function Portfolio() {
         <About />
         <Skills />
         <Projects />
-        <BeforeAfter />
         <Playground />
         <WhyMe />
         <Contact />

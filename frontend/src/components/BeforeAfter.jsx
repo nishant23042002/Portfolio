@@ -2,31 +2,31 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { REDESIGNS } from "../data";
 
-export default function BeforeAfter() {
-  return (
-    <section id="redesigns" data-testid="redesigns-section" className="py-24 md:py-40 bg-parchment">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-12 gap-8 mb-16">
-          <div className="col-span-12 md:col-span-6">
-            <div className="overline">04 — Before / After</div>
-            <h2 className="serif text-4xl md:text-6xl mt-4 tracking-tight">
-              Redesigns that <span className="italic">moved the needle</span>.
-            </h2>
-          </div>
-          <p className="col-span-12 md:col-span-5 md:col-start-8 text-ash text-lg">
-            Drag the slider to compare. Below each comparison, the metrics that actually changed.
-          </p>
-        </div>
+// export default function BeforeAfter() {
+//   return (
+//     <section id="redesigns" data-testid="redesigns-section" className="py-24 md:py-40 bg-parchment">
+//       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+//         <div className="grid grid-cols-12 gap-8 mb-16">
+//           <div className="col-span-12 md:col-span-6">
+//             <div className="overline">04 — Before / After</div>
+//             <h2 className="serif text-4xl md:text-6xl mt-4 tracking-tight">
+//               Redesigns that <span className="italic">moved the needle</span>.
+//             </h2>
+//           </div>
+//           <p className="col-span-12 md:col-span-5 md:col-start-8 text-ash text-lg">
+//             Drag the slider to compare. Below each comparison, the metrics that actually changed.
+//           </p>
+//         </div>
 
-        <div className="space-y-24 md:space-y-32">
-          {REDESIGNS.map((r, i) => (
-            <RedesignBlock key={r.id} item={r} index={i} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+//         <div className="space-y-24 md:space-y-32">
+//           {REDESIGNS.map((r, i) => (
+//             <RedesignBlock key={r.id} item={r} index={i} />
+//           ))}
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
 
 function RedesignBlock({ item, index }) {
   return (

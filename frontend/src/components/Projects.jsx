@@ -19,13 +19,34 @@ export default function Projects() {
 
   // lock scroll while modal open
   useEffect(() => {
+    const scrollY = window.scrollY;
     if (activeId) {
+      document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
     } else {
+      const top = document.body.style.top;
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      if (top) {
+        window.scrollTo(0, Math.abs(parseInt(top, 10)));
+      }
     }
     return () => {
+      const top = document.body.style.top;
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      if (top) {
+        window.scrollTo(0, Math.abs(parseInt(top, 10)));
+      }
     };
   }, [activeId]);
 
@@ -70,7 +91,7 @@ export default function Projects() {
                     <img
                       src={p.cover}
                       alt={p.title}
-                      className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                      className="w-full h-full object-fill transition-transform duration-[1200ms] group-hover:scale-101"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors" />
@@ -117,25 +138,34 @@ export default function Projects() {
               >
                 {/* Close + header */}
                 <div className="sticky top-0 z-10 glass border-b border-stone">
-                  <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+                  <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4 flex items-center justify-between gap-4">
                     <span className="overline truncate">
                       {active.year} · {active.title}
                     </span>
-                    <button
-                      onClick={() => setActiveId(null)}
-                      data-testid="project-story-close"
-                      className="inline-flex items-center gap-2 mono uppercase text-xs tracking-[0.22em] hover:text-vermilion"
-                      aria-label="close project"
-                    >
-                      Close <X size={16} />
-                    </button>
+                    <div className="flex shrink-0 items-center gap-4">
+                      <a
+                        href={active.liveDemo}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-testid={`project-live-top-${active.id}`}
+                        className="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-ink text-bone rounded-full hover:bg-vermilion transition-colors mono uppercase text-[10px] tracking-[0.18em]"
+                      >
+                        Live Demo <ExternalLink size={13} />
+                      </a>
+                      <button
+                        onClick={() => setActiveId(null)}
+                        data-testid="project-story-close"
+                        className="inline-flex items-center gap-2 mono uppercase text-xs tracking-[0.22em] hover:text-vermilion"
+                        aria-label="close project"
+                      >
+                        Close <X size={16} />
+                      </button>
+                    </div>
                   </div>
                 </div>
 
                 <div className="max-w-[1440px] mx-auto px-6 md:px-12 pb-32">
-                  <motion.div layoutId={`media-${active.id}`} className="relative w-full overflow-hidden mt-6">
-                    <img src={active.cover} alt={active.title} className="w-full h-[60vh] object-cover" />
-                  </motion.div>
+                  <ProjectSlideshow project={active} />
 
                   <motion.div
                     layoutId={`meta-${active.id}`}
@@ -148,6 +178,15 @@ export default function Projects() {
                     <div className="col-span-12 md:col-span-4 space-y-4">
                       <Meta k="Role" v={active.role} />
                       <Meta k="Timeline" v={active.timeline} />
+                      <a
+                        href={active.liveDemo}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-testid={`project-live-${active.id}`}
+                        className="inline-flex items-center gap-2 px-5 py-3 bg-ink text-bone rounded-full hover:bg-vermilion transition-colors mono uppercase text-xs tracking-[0.18em]"
+                      >
+                        Live Demo <ExternalLink size={14} />
+                      </a>
                       <Meta k="Stack" v={active.tags.join(" · ")} />
                     </div>
                   </motion.div>
@@ -187,16 +226,16 @@ export default function Projects() {
                         <div className="mono uppercase text-[10px] tracking-[0.22em] text-vermilion">
                           Step 08
                         </div>
-                        <h3 className="serif text-3xl md:text-4xl mt-3">Live Demo</h3>
+                        <h3 className="serif text-3xl md:text-4xl mt-3">Source Code</h3>
                       </div>
                       <a
                         href={active.liveUrl}
                         target="_blank"
                         rel="noreferrer"
-                        data-testid={`project-live-${active.id}`}
+                        data-testid={`project-source-${active.id}`}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-ink text-bone rounded-full hover:bg-vermilion transition-colors mono uppercase text-xs tracking-[0.22em]"
                       >
-                        Visit project <ExternalLink size={14} />
+                        View repository <ExternalLink size={14} />
                       </a>
                     </motion.div>
                   </div>
@@ -216,5 +255,54 @@ function Meta({ k, v }) {
       <div className="mono uppercase text-[10px] tracking-[0.22em] text-ash">{k}</div>
       <div className="mt-1">{v}</div>
     </div>
+  );
+}
+
+function ProjectSlideshow({ project }) {
+  const [index, setIndex] = useState(0);
+  const slides = project.screenshots?.length ? project.screenshots : [project.cover];
+  const current = slides[index % slides.length];
+
+  useEffect(() => {
+    setIndex(0);
+  }, [project.id]);
+
+  useEffect(() => {
+    if (slides.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      setIndex((i) => (i + 1) % slides.length);
+    }, 2600);
+    return () => window.clearInterval(timer);
+  }, [slides.length, project.id]);
+
+  return (
+    <motion.div layoutId={`media-${project.id}`} className="relative w-full aspect-video md:aspect-[16/7] xl:aspect-[16/6] max-h-[72vh] overflow-hidden mt-6 bg-parchment">
+      <AnimatePresence mode="popLayout">
+        <motion.img
+          key={current}
+          src={current}
+          alt={`${project.title} screenshot ${index + 1}`}
+          initial={{ x: 80, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -80, opacity: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 w-full h-full object-contain"
+        />
+      </AnimatePresence>
+
+      {slides.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {slides.map((src, i) => (
+            <span
+              key={src}
+              className={
+                "h-1.5 rounded-full transition-all " +
+                (i === index % slides.length ? "w-8 bg-bone" : "w-1.5 bg-bone/50")
+              }
+            />
+          ))}
+        </div>
+      )}
+    </motion.div>
   );
 }
