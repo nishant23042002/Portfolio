@@ -92,6 +92,9 @@ export const PROJECTS = [
       "https://res.cloudinary.com/thelayerco/image/upload/v1782648706/Screenshot_2026-06-28_172900_xxd7db.png",
       "https://res.cloudinary.com/thelayerco/image/upload/v1782648670/Screenshot_2026-06-28_173025_gp75sp.png",
       "https://res.cloudinary.com/thelayerco/image/upload/v1782648670/Screenshot_2026-06-28_173054_jmohw1.png",
+      "https://res.cloudinary.com/thelayerco/image/upload/v1782681434/Screenshot_2026-06-29_024701_bguv2j.png",
+      "https://res.cloudinary.com/thelayerco/image/upload/v1782681549/Screenshot_2026-06-29_024832_nor47a.png",
+      "https://res.cloudinary.com/thelayerco/image/upload/v1782681550/Screenshot_2026-06-29_024851_ok9suc.png"
     ],
     role: "Solo full-stack build",
     timeline: "In progress",
@@ -121,9 +124,13 @@ export const PROJECTS = [
       "Finance dashboard for income, expenses, charts and transaction history",
     year: "2025",
     tags: ["React", "Vite", "Redux", "Recharts"],
-    cover:
-      "https://images.pexels.com/photos/5872353/pexels-photo-5872353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1400",
-    screenshots: [],
+    cover: "https://res.cloudinary.com/thelayerco/image/upload/v1782681137/Screenshot_2026-06-29_024108_wvznng.png",
+    screenshots: [
+      "https://res.cloudinary.com/thelayerco/image/upload/v1782681137/Screenshot_2026-06-29_023916_ksimp6.png",
+      "https://res.cloudinary.com/thelayerco/image/upload/v1782681137/Screenshot_2026-06-29_023945_pugo2s.png",
+      "https://res.cloudinary.com/thelayerco/image/upload/v1782681137/Screenshot_2026-06-29_024001_efztnd.png",
+      "https://res.cloudinary.com/thelayerco/image/upload/v1782681137/Screenshot_2026-06-29_024022_ob9d99.png",
+    ],
     role: "Frontend build",
     timeline: "2025",
     liveUrl: "https://github.com/nishant23042002/AI-Expense-Tracker",
