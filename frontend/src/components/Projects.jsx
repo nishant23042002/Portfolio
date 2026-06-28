@@ -91,7 +91,7 @@ export default function Projects() {
                     <img
                       src={p.cover}
                       alt={p.title}
-                      className="w-full h-full object-fill transition-transform duration-[1200ms] group-hover:scale-101"
+                      className="w-full h-full object-fill transition-transform duration-1000 group-hover:scale-101"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors" />

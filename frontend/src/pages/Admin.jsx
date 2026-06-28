@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Lock, RefreshCcw, Mail, ExternalLink, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { API } from "../lib/api";
 const ADMIN_PASSWORD = "admin123"; // simple gate. Change to suit.
 const STORAGE_KEY = "kael_admin_ok";
 

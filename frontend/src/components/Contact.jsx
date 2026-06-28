@@ -5,8 +5,7 @@ import { Send, Check, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import { PROFILE } from "../data";
 import MagneticButton from "./MagneticButton";
-
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+import { API } from "../lib/api";
 
 const BUDGETS = ["< Rs.5000", "Rs.5000 - Rs.15000", "Rs.15000 - Rs.40000", "Rs.40000+", "Not sure yet"];
 
