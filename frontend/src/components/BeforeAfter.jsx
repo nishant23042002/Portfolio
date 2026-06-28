@@ -46,10 +46,10 @@ function RedesignBlock({ item, index }) {
         <h3 className="serif text-3xl md:text-4xl">{item.name}</h3>
         <ul className="mt-8 divide-y divide-stone border-y border-stone">
           {item.metrics.map((m) => (
-            <li key={m.label} className="py-5 flex items-baseline justify-between gap-4">
-              <span className="text-lg">{m.label}</span>
-              <span className="mono text-xl md:text-2xl">
-                <span className="text-ash line-through mr-3">
+            <li key={m.label} className="py-5 flex items-baseline justify-between gap-2 sm:gap-4">
+              <span className="text-lg min-w-0">{m.label}</span>
+              <span className="mono text-base sm:text-xl md:text-2xl shrink-0 whitespace-nowrap">
+                <span className="text-ash line-through mr-1 sm:mr-3">
                   {m.from}
                   {m.suffix || ""}
                 </span>

@@ -45,7 +45,7 @@ export default function Contact() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-12 gap-8 md:gap-12">
         <div className="col-span-12 lg:col-span-5">
           <div className="mono uppercase text-[11px] tracking-[0.22em] text-vermilion">07 — Contact</div>
-          <h2 className="serif text-5xl md:text-7xl leading-[0.95] tracking-tight mt-6">
+          <h2 className="serif text-[clamp(2.35rem,11vw,3.5rem)] md:text-7xl leading-[0.95] tracking-tight mt-6">
             Let{`'`}s build<br />
             something <em className="italic">good</em>
             <span className="text-vermilion">.</span>
@@ -99,7 +99,7 @@ export default function Contact() {
             <span className="mono uppercase text-[10px] tracking-[0.22em] text-bone/60 block mb-3">
               Budget
             </span>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 max-w-full overflow-hidden">
               {BUDGETS.map((b) => (
                 <button
                   type="button"
@@ -107,7 +107,7 @@ export default function Contact() {
                   data-testid={`contact-budget-${b.replace(/[^a-z0-9]/gi, "")}`}
                   onClick={() => setForm((f) => ({ ...f, budget: b }))}
                   className={
-                    "px-4 py-2 rounded-full border mono capitalize text-[12px] tracking-[0.22em] transition-colors " +
+                    "max-w-full px-4 py-2 rounded-full border mono capitalize text-[12px] tracking-[0.16em] sm:tracking-[0.22em] transition-colors whitespace-normal break-words " +
                     (form.budget === b
                       ? "bg-vermilion border-vermilion text-bone"
                       : "border-bone/30 hover:border-bone")
@@ -217,9 +217,9 @@ function Field({ label, id, as, className = "", testid, ...props }) {
 
 function Row({ k, v, testid }) {
   return (
-    <div data-testid={testid} className="flex items-baseline gap-8 border-b border-bone/15 pb-4">
-      <span className="mono uppercase text-[10px] tracking-[0.22em] text-bone/50 w-32 shrink-0">{k}</span>
-      <span className="text-lg break-all">{v}</span>
+    <div data-testid={testid} className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 border-b border-bone/15 pb-4">
+      <span className="mono uppercase text-[10px] tracking-[0.22em] text-bone/50 sm:w-32 shrink-0">{k}</span>
+      <span className="text-lg min-w-0 break-words">{v}</span>
     </div>
   );
 }

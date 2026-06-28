@@ -19,19 +19,19 @@ export default function About() {
               className="w-full h-[460px] object-cover grayscale contrast-110"
               data-testid="about-portrait"
             />
-            <div className="absolute -bottom-5 -right-5 bg-vermilion text-bone px-4 py-2 mono uppercase text-[10px] tracking-[0.22em]">
+            <div className="absolute -bottom-5 right-0 md:-right-5 max-w-full bg-vermilion text-bone px-4 py-2 mono uppercase text-[10px] tracking-[0.22em] truncate">
               {PROFILE.location}
             </div>
           </motion.div>
         </div>
 
         <div className="col-span-12 md:col-span-7 lg:col-span-7 md:col-start-6 lg:col-start-6">
-          <h2 className="serif text-4xl md:text-6xl leading-[1.05] tracking-tight" data-testid="about-heading">
+          <h2 className="serif text-[clamp(2.25rem,10vw,3rem)] md:text-6xl leading-[1.05] tracking-tight" data-testid="about-heading">
             I build the web like it{`'`}s a <em className="italic">living document</em>
             <span className="text-vermilion">.</span>
           </h2>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 text-lg leading-relaxed">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 text-lg leading-relaxed break-words">
             <p>
               I{`'`}m a detail-oriented frontend developer focused on responsive, accessible and
               high-performance web apps. I translate complex Figma designs into clean, semantic,
@@ -43,7 +43,7 @@ export default function About() {
             </p>
           </div>
 
-          <dl className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-stone pt-8">
+          <dl className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 border-t border-stone pt-8">
             <Meta k="Based in" v={PROFILE.location} />
             <Meta k="Stack" v="React · Node · Mongo" />
             <Meta k="Loves" v="Motion & a11y" />
@@ -59,7 +59,7 @@ function Meta({ k, v }) {
   return (
     <div>
       <dt className="overline">{k}</dt>
-      <dd className="mt-2 text-base">{v}</dd>
+      <dd className="mt-2 text-base break-words">{v}</dd>
     </div>
   );
 }

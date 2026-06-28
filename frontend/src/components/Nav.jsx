@@ -32,7 +32,7 @@ export default function Nav() {
     >
       <div
         className={`max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between transition-all duration-500 ${
-          scrolled ? "glass rounded-full mx-4 md:mx-auto px-6 py-3" : ""
+          scrolled ? "glass rounded-full mx-4 md:mx-auto px-5 md:px-6 py-3" : ""
         }`}
       >
         <a href="#top" data-testid="nav-logo" className="serif italic text-2xl md:text-4xl tracking-tight">

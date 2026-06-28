@@ -3,7 +3,7 @@ import { SKILL_GROUPS, SKILLS_MARQUEE } from "../data";
 
 export default function Skills() {
   return (
-    <section id="skills" data-testid="skills-section" className="relative py-24 md:py-40 bg-parchment">
+    <section id="skills" data-testid="skills-section" className="relative w-full py-24 md:py-40 bg-parchment">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
         <div className="flex items-end justify-between mb-16">
           <div>

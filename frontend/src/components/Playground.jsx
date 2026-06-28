@@ -14,11 +14,11 @@ export default function Playground() {
         <div className="grid grid-cols-12 gap-8 mb-16">
           <div className="col-span-12 md:col-span-6">
             <div className="overline">05 — Design Playground</div>
-            <h2 className="serif text-4xl md:text-6xl mt-4 tracking-tight">
+            <h2 className="serif text-[clamp(2.25rem,10vw,3rem)] md:text-6xl mt-4 tracking-tight leading-[1.05]">
               Tiny <span className="italic">experiments</span>, big delight.
             </h2>
           </div>
-          <p className="col-span-12 md:col-span-5 md:col-start-8 text-ash text-lg">
+          <p className="col-span-12 md:col-span-5 md:col-start-8 text-ash text-lg break-words">
             A live sandbox of interactions I obsess over: 3D tilt, magnetic pulls, glass, liquid, and the
             micro-feedback that makes interfaces feel alive.
           </p>
@@ -68,7 +68,7 @@ function TiltCard() {
           <Sparkles size={18} />
         </div>
         <div>
-          <h3 className="serif text-4xl md:text-5xl leading-tight">
+          <h3 className="serif text-3xl sm:text-4xl md:text-5xl leading-tight">
             Move your cursor.<br />
             <em className="italic text-vermilion">Feel the depth.</em>
           </h3>
@@ -93,7 +93,7 @@ function MagneticCard() {
         <span className="overline">Magnetic</span>
         <h3 className="serif text-2xl mt-2">Pull me closer</h3>
       </div>
-      <MagneticButton testid="playground-magnetic-btn" strength={28}>
+      <MagneticButton testid="playground-magnetic-btn" strength={28} className="px-5">
         Hover
       </MagneticButton>
     </div>
