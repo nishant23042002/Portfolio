@@ -20,7 +20,7 @@ const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017";
 const DB_NAME = process.env.DB_NAME || "portfolio";
 const CORS_ORIGINS = (process.env.CORS_ORIGINS || "*")
   .split(",")
-  .map((s) => s.trim())
+  .map((s) => s.trim().replace(/\/+$/, ""))
   .filter(Boolean);
 
 const app = express();
