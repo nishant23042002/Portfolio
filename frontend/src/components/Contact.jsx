@@ -23,7 +23,7 @@ export default function Contact() {
     }
     setState("loading");
     try {
-      await axios.post(`${API}/contact`, {
+      const { data } = await axios.post(`${API}/contact`, {
         name: form.name,
         email: form.email,
         subject: form.subject || undefined,
@@ -31,7 +31,11 @@ export default function Contact() {
         budget: form.budget || undefined,
       });
       setState("success");
-      toast.success("Message sent. I'll reply within 24h.");
+      if (data?.email?.sent === false) {
+        toast.success("Message saved. Email notification is not configured yet.");
+      } else {
+        toast.success("Message sent. I'll reply within 24h.");
+      }
       setForm({ name: "", email: "", subject: "", message: "", budget: "" });
     } catch (err) {
       setState("error");

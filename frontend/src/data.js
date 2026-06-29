@@ -10,7 +10,7 @@ export const PROFILE = {
   email: "nishantsapkal2304@gmail.com",
   phone: "+91 90 1128 5958",
   resumeUrl:
-    "https://customer-assets.emergentagent.com/job_dev-portfolio-hub-173/artifacts/jof90fem_NishantSapkalResumeFD.pdf",
+    "https://drive.google.com/file/d/1N1p5aOlRvlaVcBSjvqfl0nohzmJTGCYr/view?usp=drive_link",
   social: {
     github: "https://github.com/nishant23042002",
     linkedin: "https://www.linkedin.com/in/nishant-sapkal",

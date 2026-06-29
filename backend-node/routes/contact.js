@@ -1,6 +1,7 @@
 const express = require("express");
 const { body, validationResult } = require("express-validator");
 const Contact = require("../models/Contact");
+const { sendContactNotification } = require("../lib/mailer");
 
 const router = express.Router();
 
@@ -25,7 +26,14 @@ router.post("/", validators, async (req, res, next) => {
       message: req.body.message,
       budget: req.body.budget || null,
     });
-    res.status(200).json(doc.toJSON());
+    let email = { sent: false };
+    try {
+      email = await sendContactNotification(doc);
+    } catch (mailErr) {
+      console.error("Contact notification email failed:", mailErr.message);
+      email = { sent: false, reason: "send_failed" };
+    }
+    res.status(200).json({ ...doc.toJSON(), email });
   } catch (err) {
     next(err);
   }
