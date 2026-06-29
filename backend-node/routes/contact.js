@@ -4,6 +4,22 @@ const Contact = require("../models/Contact");
 const { sendContactNotification } = require("../lib/mailer");
 
 const router = express.Router();
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+
+function requireAdmin(req, res, next) {
+  if (!ADMIN_TOKEN) {
+    return res.status(503).json({
+      detail: "Admin inbox is not configured. Set ADMIN_TOKEN on the backend.",
+    });
+  }
+
+  const token = req.get("x-admin-token") || "";
+  if (token !== ADMIN_TOKEN) {
+    return res.status(401).json({ detail: "Unauthorized" });
+  }
+
+  next();
+}
 
 const validators = [
   body("name").isString().trim().isLength({ min: 1, max: 120 }).withMessage("name is required"),
@@ -39,7 +55,7 @@ router.post("/", validators, async (req, res, next) => {
   }
 });
 
-router.get("/", async (_req, res, next) => {
+router.get("/", requireAdmin, async (_req, res, next) => {
   try {
     const rows = await Contact.find().sort({ created_at: -1 }).limit(500);
     res.json(rows.map((r) => r.toJSON()));

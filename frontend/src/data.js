@@ -9,8 +9,8 @@ export const PROFILE = {
   location: "Pune, Maharashtra",
   email: "nishantsapkal2304@gmail.com",
   phone: "+91 90 1128 5958",
-  resumeUrl:
-    "https://drive.google.com/file/d/1N1p5aOlRvlaVcBSjvqfl0nohzmJTGCYr/view?usp=drive_link",
+  // Replace frontend/public/resume.pdf whenever the resume changes.
+  resumeUrl: "/resume.pdf",
   social: {
     github: "https://github.com/nishant23042002",
     linkedin: "https://www.linkedin.com/in/nishant-sapkal",

@@ -6,7 +6,6 @@ const LINKS = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
   { href: "#work", label: "Work" },
-  // { href: "#redesigns", label: "Redesigns" },
   { href: "#playground", label: "Playground" },
   { href: "#why", label: "Why Me" },
   { href: "#contact", label: "Contact" },
@@ -36,7 +35,7 @@ export default function Nav() {
         }`}
       >
         <a href="#top" data-testid="nav-logo" className="serif italic text-2xl md:text-4xl tracking-tight">
-          N<span className="text-vermilion">·</span>S
+          N<span className="text-vermilion">.</span>S
         </a>
 
         <nav className="hidden lg:flex items-center gap-8">
@@ -57,7 +56,7 @@ export default function Nav() {
           data-testid="nav-cta"
           className="hidden lg:inline-flex mono uppercase text-xs tracking-[0.22em] border border-gray px-4 py-2 rounded-full hover:bg-ink hover:text-bone transition-colors"
         >
-          Hire me →
+          Hire me <span aria-hidden="true">-&gt;</span>
         </a>
 
         <button
@@ -80,7 +79,7 @@ export default function Nav() {
             className="fixed inset-0 bg-ink text-bone z-50 flex flex-col p-8"
           >
             <div className="flex justify-between items-center">
-              <span className="serif italic text-3xl">N·S</span>
+              <span className="serif italic text-3xl">N.S</span>
               <button
                 onClick={() => setOpen(false)}
                 data-testid="nav-menu-close"

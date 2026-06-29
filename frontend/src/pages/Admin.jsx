@@ -3,23 +3,37 @@ import axios from "axios";
 import { Lock, RefreshCcw, Mail, ExternalLink, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { API } from "../lib/api";
-const ADMIN_PASSWORD = "admin123"; // simple gate. Change to suit.
-const STORAGE_KEY = "kael_admin_ok";
+
+const STORAGE_KEY = "portfolio_admin_token";
 
 export default function Admin() {
-  const [authed, setAuthed] = useState(() => sessionStorage.getItem(STORAGE_KEY) === "1");
+  const [authed, setAuthed] = useState(() => Boolean(sessionStorage.getItem(STORAGE_KEY)));
   const [pwd, setPwd] = useState("");
   const [error, setError] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchMessages = async () => {
+  const fetchMessages = async (token = sessionStorage.getItem(STORAGE_KEY)) => {
     setLoading(true);
+    setError("");
     try {
-      const { data } = await axios.get(`${API}/contact`);
+      const { data } = await axios.get(`${API}/contact`, {
+        headers: { "x-admin-token": token || "" },
+      });
       setMessages(data);
+      return true;
     } catch (e) {
-      setError("Failed to fetch messages");
+      const status = e?.response?.status;
+      if (status === 401) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        setAuthed(false);
+        setError("Wrong password");
+      } else if (status === 503) {
+        setError("Admin inbox is not configured on the backend.");
+      } else {
+        setError("Failed to fetch messages");
+      }
+      return false;
     } finally {
       setLoading(false);
     }
@@ -29,14 +43,19 @@ export default function Admin() {
     if (authed) fetchMessages();
   }, [authed]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (pwd === ADMIN_PASSWORD) {
-      sessionStorage.setItem(STORAGE_KEY, "1");
+    const token = pwd.trim();
+    if (!token) {
+      setError("Enter the admin password");
+      return;
+    }
+
+    sessionStorage.setItem(STORAGE_KEY, token);
+    const ok = await fetchMessages(token);
+    if (ok) {
       setAuthed(true);
       setError("");
-    } else {
-      setError("Wrong password");
     }
   };
 
@@ -55,7 +74,7 @@ export default function Admin() {
           data-testid="admin-login-form"
         >
           <Lock size={24} className="text-vermilion" />
-          <h1 className="serif text-4xl mt-6 leading-tight">Admin · Inbox</h1>
+          <h1 className="serif text-4xl mt-6 leading-tight">Admin - Inbox</h1>
           <p className="text-ash mt-2 text-sm">Enter the password to view contact submissions.</p>
 
           <label className="block mt-8 mono uppercase text-[10px] tracking-[0.22em] text-ash">Password</label>
@@ -67,14 +86,19 @@ export default function Admin() {
             autoFocus
             className="block w-full bg-transparent border-0 border-b border-ink focus:border-vermilion outline-none pt-3 pb-3 text-lg"
           />
-          {error && <p data-testid="admin-error" className="text-vermilion text-sm mt-3">{error}</p>}
+          {error && (
+            <p data-testid="admin-error" className="text-vermilion text-sm mt-3">
+              {error}
+            </p>
+          )}
 
           <button
             type="submit"
             data-testid="admin-login-submit"
-            className="mt-8 w-full bg-ink text-bone py-3 mono uppercase text-xs tracking-[0.22em] hover:bg-vermilion transition-colors"
+            disabled={loading}
+            className="mt-8 w-full bg-ink text-bone py-3 mono uppercase text-xs tracking-[0.22em] hover:bg-vermilion transition-colors disabled:opacity-50"
           >
-            Unlock
+            {loading ? "Checking..." : "Unlock"}
           </button>
 
           <Link
@@ -92,16 +116,17 @@ export default function Admin() {
   return (
     <div data-testid="admin-page" className="min-h-screen bg-bone">
       <header className="border-b border-stone">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
           <div>
             <div className="mono uppercase text-[10px] tracking-[0.22em] text-vermilion">Admin</div>
             <h1 className="serif text-3xl md:text-4xl mt-1">Inbox</h1>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <button
-              onClick={fetchMessages}
+              onClick={() => fetchMessages()}
               data-testid="admin-refresh"
-              className="inline-flex items-center gap-2 border border-ink px-4 py-2 mono uppercase text-[10px] tracking-[0.22em] hover:bg-ink hover:text-bone transition-colors"
+              disabled={loading}
+              className="inline-flex items-center gap-2 border border-ink px-4 py-2 mono uppercase text-[10px] tracking-[0.22em] hover:bg-ink hover:text-bone transition-colors disabled:opacity-50"
             >
               <RefreshCcw size={12} /> Refresh
             </button>
@@ -124,18 +149,24 @@ export default function Admin() {
       </header>
 
       <main className="max-w-[1440px] mx-auto px-6 md:px-12 py-10">
-        <div className="flex items-baseline justify-between mb-6">
+        <div className="flex flex-wrap items-baseline justify-between gap-3 mb-6">
           <p className="text-ash">
             <span data-testid="admin-message-count" className="text-ink font-medium">
               {messages.length}
             </span>{" "}
             {messages.length === 1 ? "message" : "messages"} total
           </p>
-          {loading && <span className="mono text-[10px] uppercase tracking-[0.22em] text-vermilion">Loading…</span>}
+          {loading && <span className="mono text-[10px] uppercase tracking-[0.22em] text-vermilion">Loading...</span>}
         </div>
 
+        {error && (
+          <p data-testid="admin-error" className="mb-6 text-vermilion text-sm">
+            {error}
+          </p>
+        )}
+
         {messages.length === 0 && !loading ? (
-          <div data-testid="admin-empty" className="border border-stone p-16 text-center">
+          <div data-testid="admin-empty" className="border border-stone p-10 md:p-16 text-center">
             <Mail size={28} className="mx-auto text-ash" />
             <p className="mt-4 text-ash">No messages yet.</p>
           </div>
@@ -145,15 +176,13 @@ export default function Admin() {
               <li
                 key={m.id}
                 data-testid={`admin-message-${m.id}`}
-                className="border border-stone p-6 hover:border-ink transition-colors"
+                className="border border-stone p-5 md:p-6 hover:border-ink transition-colors"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-4">
-                  <div>
-                    <h3 className="serif text-2xl leading-tight">
-                      {m.subject || "(no subject)"}
-                    </h3>
-                    <p className="mono uppercase text-[10px] tracking-[0.22em] text-ash mt-1">
-                      {m.name} ·{" "}
+                  <div className="min-w-0">
+                    <h3 className="serif text-2xl leading-tight break-words">{m.subject || "(no subject)"}</h3>
+                    <p className="mono uppercase text-[10px] tracking-[0.16em] md:tracking-[0.22em] text-ash mt-1 break-words">
+                      {m.name} -{" "}
                       <a
                         href={`mailto:${m.email}`}
                         className="text-vermilion link-line"
@@ -161,14 +190,14 @@ export default function Admin() {
                       >
                         {m.email}
                       </a>
-                      {m.budget && <> · {m.budget}</>}
+                      {m.budget && <> - {m.budget}</>}
                     </p>
                   </div>
                   <time className="mono text-[10px] uppercase tracking-[0.22em] text-ash">
                     {new Date(m.created_at).toLocaleString()}
                   </time>
                 </div>
-                <p className="mt-4 text-base leading-relaxed whitespace-pre-wrap">{m.message}</p>
+                <p className="mt-4 text-base leading-relaxed whitespace-pre-wrap break-words">{m.message}</p>
                 <div className="mt-4">
                   <a
                     href={`mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject || "Your message")}`}

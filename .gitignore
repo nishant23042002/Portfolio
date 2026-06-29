@@ -17,7 +17,7 @@ node_modules/
 !.yarn/versions
 MIGRATION_GUIDE.md
 test_result.md
-README.md
+frontend/README.md
 
 # Testing
 /coverage
@@ -88,6 +88,8 @@ frontend/node_modules/.cache/default-development/7.pack
 .env
 .env.*
 *.env
+!.env.example
+!**/.env.example
 credentials.json
 *.key
 .credentials

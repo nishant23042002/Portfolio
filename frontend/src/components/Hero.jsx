@@ -17,15 +17,13 @@ export default function Hero() {
   return (
     <section id="top" data-testid="hero-section" className="relative min-h-[100svh] pt-32 md:pt-40 pb-20">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        {/* overline + availability row */}
         <div className="flex flex-wrap items-center justify-between gap-6 mb-12 md:mb-20">
           <div className="overline" data-testid="hero-overline">
-            <span className="text-vermilion text-md">●</span> Portfolio · 2026 Edition
+            <span className="text-vermilion text-md" aria-hidden="true">•</span> Portfolio - 2026 Edition
           </div>
           <AvailabilityCard />
         </div>
 
-        {/* Massive headline */}
         <motion.h1
           variants={stagger}
           initial="hidden"
@@ -50,7 +48,6 @@ export default function Hero() {
           </motion.span>
         </motion.h1>
 
-        {/* CTA + meta */}
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -59,7 +56,7 @@ export default function Hero() {
         >
           <motion.div variants={item} className="flex flex-wrap items-center gap-4">
             <MagneticButton testid="hero-cta-projects" as="a" href="#work">
-              See selected work →
+              See selected work <span aria-hidden="true">-&gt;</span>
             </MagneticButton>
             <MagneticButton
               testid="hero-cta-contact"
@@ -88,7 +85,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

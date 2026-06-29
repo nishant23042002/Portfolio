@@ -11,7 +11,7 @@ const BUDGETS = ["< Rs.5000", "Rs.5000 - Rs.15000", "Rs.15000 - Rs.40000", "Rs.4
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "", budget: "" });
-  const [state, setState] = useState("idle"); // idle | loading | success | error
+  const [state, setState] = useState("idle");
 
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
@@ -47,7 +47,7 @@ export default function Contact() {
     <section id="contact" data-testid="contact-section" className="bg-ink text-bone py-24 md:py-40">
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-12 gap-8 md:gap-12">
         <div className="col-span-12 lg:col-span-5">
-          <div className="mono uppercase text-[11px] tracking-[0.22em] text-vermilion">06 — Contact</div>
+          <div className="mono uppercase text-[11px] tracking-[0.22em] text-vermilion">06 - Contact</div>
           <h2 className="serif text-[clamp(2.35rem,11vw,3.5rem)] md:text-7xl leading-[0.95] tracking-tight mt-6">
             Let{`'`}s build<br />
             something <em className="italic">good</em>
@@ -62,7 +62,7 @@ export default function Contact() {
             <Row k="Email" v={PROFILE.email} testid="contact-email" />
             <Row k="Phone" v={PROFILE.phone} testid="contact-phone" />
             <Row k="Based in" v={PROFILE.location} testid="contact-location" />
-            <Row k="Working hours" v="Mon–Sat · 09:00–20:00 IST" testid="contact-hours" />
+            <Row k="Working hours" v="Mon-Sat - 09:00-20:00 IST" testid="contact-hours" />
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export default function Contact() {
               strength={18}
               disabled={state === "loading"}
             >
-              {state === "loading" && "Sending…"}
+              {state === "loading" && "Sending..."}
               {state === "idle" && (
                 <>
                   Send message <Send size={14} />
@@ -166,16 +166,15 @@ export default function Contact() {
         </form>
       </div>
 
-      {/* Footer */}
       <footer className="max-w-[1440px] mx-auto px-6 md:px-12 mt-24 md:mt-40 pt-10 border-t border-bone/20 flex flex-wrap items-center justify-between gap-6 text-bone/60">
         <div className="mono uppercase text-[10px] tracking-[0.22em]">
-          © {new Date().getFullYear()} {PROFILE.name} · Designed & built in {PROFILE.location}
+          (c) {new Date().getFullYear()} {PROFILE.name} - Designed & built in {PROFILE.location}
         </div>
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex gap-6 mono uppercase text-[10px] tracking-[0.22em]"
+          className="flex flex-wrap gap-6 mono uppercase text-[10px] tracking-[0.22em]"
         >
           <a href={PROFILE.social.github} className="link-line" target="_blank" rel="noreferrer" data-testid="footer-github">GitHub</a>
           <a href={PROFILE.social.linkedin} className="link-line" target="_blank" rel="noreferrer" data-testid="footer-linkedin">LinkedIn</a>

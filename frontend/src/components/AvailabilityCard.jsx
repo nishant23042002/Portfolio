@@ -8,7 +8,7 @@ export default function AvailabilityCard({ floating = false }) {
     status: "available",
     label: "Available for projects",
     next_slot: "Jan 2026",
-    timezone: "GMT+1 (Paris)",
+    timezone: "GMT+5:30 (IST)",
   });
 
   useEffect(() => {
@@ -50,10 +50,10 @@ export default function AvailabilityCard({ floating = false }) {
       </span>
       <div className="leading-tight">
         <div data-testid="availability-status" className="mono uppercase text-[10px] tracking-[0.22em] text-ash">
-          {isAvailable ? "Open · Booking" : "Limited"}
+          {isAvailable ? "Open - Booking" : "Limited"}
         </div>
         <div data-testid="availability-label" className="text-sm font-medium">
-          {data.label} <span className="text-ash">· {data.next_slot}</span>
+          {data.label} <span className="text-ash">- {data.next_slot}</span>
         </div>
       </div>
     </motion.div>
