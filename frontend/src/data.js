@@ -10,7 +10,7 @@ export const PROFILE = {
   email: "nishantsapkal2304@gmail.com",
   phone: "+91 90 1128 5958",
   // Replace frontend/public/resume.pdf whenever the resume changes.
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/nishant.sapkal_resume.pdf",
   social: {
     github: "https://github.com/nishant23042002",
     linkedin: "https://www.linkedin.com/in/nishant-sapkal",
